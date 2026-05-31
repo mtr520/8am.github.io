@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>8点官方商城</title>
+    <style>
+        body { margin: 0; padding: 15px; background: linear-gradient(135deg, #05070f 0%, #090d16 50%, #110f26 100%); color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 95vh; overflow-x: hidden; position: relative; -webkit-tap-highlight-color: transparent; }
+        body::before { content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 3px; background: transparent; box-shadow: 15vw 10vh #fff, 25vw 35vh rgba(255,255,255,0.7), 40vw 15vh #fff, 75vw 25vh rgba(255,255,255,0.4), 90vw 10vh #fff, 5vw 50vh rgba(255,255,255,0.8), 30vw 70vh #fff, 60vw 60vh rgba(255,255,255,0.5), 85vw 80vh #fff, 95vw 45vh rgba(255,255,255,0.9), 20vw 90vh rgba(255,255,255,0.6), 50vw 85vh #fff, 70vw 95vh rgba(255,255,255,0.7), 12vw 30vh #fff, 65vw 15vh rgba(255,255,255,0.8); animation: sB 3s infinite ease-in-out alternate; z-index: 0; }
+        @keyframes sB { 0% { opacity: 0.3; transform: scale(0.9); } 100% { opacity: 1; transform: scale(1.1); } }
+        .shooting-stars { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .meteor { position: absolute; height: 2px; background: linear-gradient(-45deg, #38bdf8, rgba(0,0,0,0)); border-radius: 999px; filter: drop-shadow(0 0 6px #38bdf8); animation: mS 6s infinite ease-in-out; opacity: 0; }
+        .meteor:nth-child(1) { top: 12%; left: 65%; width: 110px; animation-delay: 0s; animation-duration: 6.5s; }
+        .meteor:nth-child(2) { top: 28%; left: 85%; width: 140px; background: linear-gradient(-45deg, #a78bfa, rgba(0,0,0,0)); filter: drop-shadow(0 0 6px #a78bfa); animation-delay: 2.2s; animation-duration: 8s; }
+        .meteor:nth-child(3) { top: 7%; left: 45%; width: 90px; animation-delay: 4.8s; animation-duration: 5.5s; }
+        @keyframes mS { 0% { transform: rotate(-33deg) translateX(0); opacity: 0; } 1% { opacity: 1; } 8% { transform: rotate(-33deg) translateX(-450px); opacity: 0; } 100% { transform: rotate(-33deg) translateX(-450px); opacity: 0; } }
+        
+        .container { max-width: 550px; width: 100%; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px) saturate(160%); -webkit-backdrop-filter: blur(25px) saturate(160%); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; padding: 30px 22px; box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.15); box-sizing: border-box; z-index: 10; animation: cF 5s infinite ease-in-out alternate; }
+        @keyframes cF { 0% { transform: translateY(0); } 100% { transform: translateY(-6px); box-shadow: 0 35px 80px rgba(56,189,248,0.12); } }
+        
+        h1 { font-size: 24px; margin-top: 0; font-weight: 700; color: #ffffff; text-align: center; background: linear-gradient(120deg, #ffffff 40%, #cbd5e1 70%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 14px; color: #94a3b8; font-weight: 400; margin-bottom: 25px; text-align: center; letter-spacing: 0.5px; }
+        .notice-box { text-align: left; background: rgba(0, 0, 0, 0.4); border-left: 3.5px solid rgba(56, 189, 248, 0.6); padding: 18px; border-radius: 0 16px 16px 0; margin-bottom: 25px; font-size: 14px; line-height: 1.6; box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6); border-top: 1px solid rgba(255,255,255,0.02); border-right: 1px solid rgba(255,255,255,0.02); }
+        .notice-item { margin-bottom: 12px; display: flex; align-items: flex-start; }
+        .notice-item:last-child { margin-bottom: 0; }
+        .icon { margin-right: 10px; flex-shrink: 0; font-size: 15px; }
+        .warning-text { color: #f59e0b; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 10px; margin-top: 10px; opacity: 0.9; }
+        
+        
+        .dock-container { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; perspective: 1000px; width: 100%; }
+        .dock-card { 
+            background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.01) 100%); 
+            border-radius: 20px; padding: 16px 10px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.25); border-left: 1px solid rgba(255, 255, 255, 0.18); border-right: 1px solid rgba(255, 255, 255, 0.1); border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(30px) saturate(220%); -webkit-backdrop-filter: blur(30px) saturate(220%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255,255,255,0.3);
+            transform-style: preserve-3d; transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s; cursor: pointer;
+        }
+        
+        
+        .btn-glow { position: absolute; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(56, 189, 248, 0.12) 30%, rgba(167, 139, 250, 0.02) 60%, transparent 70%); border-radius: 50%; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) translateZ(-1px); transition: opacity 0.4s ease; mix-blend-mode: overlay; }
+        .dock-emoji { font-size: 26px; margin-bottom: 8px; transform: translateZ(25px); transition: transform 0.2s ease; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
+        .dock-label { font-size: 13px; font-weight: 500; color: #94a3b8; transform: translateZ(20px); transition: color 0.3s, transform 0.2s; }
+        .dock-val { font-size: 14px; font-weight: 600; margin-top: 4px; transform: translateZ(20px); transition: color 0.3s, transform 0.2s; }
+        .tg-style { color: #38bdf8; text-shadow: 0 0 10px rgba(56,189,248,0.2); }
+        .qq-style { color: #f43f5e; text-shadow: 0 0 10px rgba(244,63,94,0.2); }
+        
+        
+        .dock-card:hover { box-shadow: 0 16px 35px rgba(56, 189, 248, 0.12), inset 0 1px 1px rgba(255,255,255,0.5); }
+        .dock-card:hover .dock-emoji { transform: translateZ(35px) scale(1.1); }
+        .dock-card:hover .dock-label { color: #ffffff; transform: translateZ(25px); }
+        .dock-card:active { transform: scale(0.96) !important; }
+        
+        
+        .btn-wrap { perspective: 1000px; width: 100%; position: relative; }
+        .btn-enter { 
+            display: inline-block; width: 100%; padding: 16px 0; 
+            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); 
+            color: rgba(255,255,255,0.95); text-decoration: none; border-radius: 18px; font-size: 16px; font-weight: 600; letter-spacing: 3px; text-align: center; box-sizing: border-box; 
+            position: relative; overflow: hidden; cursor: pointer;
+            border-top: 1px solid rgba(255, 255, 255, 0.35); border-left: 1px solid rgba(255, 255, 255, 0.25); border-right: 1px solid rgba(255, 255, 255, 0.15); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(35px) saturate(210%); -webkit-backdrop-filter: blur(35px) saturate(210%); 
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.4), inset 0 -3px 12px rgba(0,0,0,0.1); 
+            transform-style: preserve-3d; transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s;
+        }
+        .btn-text { display: inline-block; transform: translateZ(30px); text-shadow: 0 3px 8px rgba(0,0,0,0.4); transition: transform 0.2s ease, color 0.3s; }
+        .btn-enter:hover { box-shadow: 0 25px 55px rgba(56, 189, 248, 0.15), inset 0 1px 1px rgba(255,255,255,0.6); border-top-color: rgba(255,255,255,0.6); border-left-color: rgba(255,255,255,0.5); }
+        .btn-enter:hover .btn-text { transform: translateZ(40px) scale(1.02); color: #ffffff; }
+        .btn-enter:active { transform: scale(0.97) !important; }
+        
+        
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 10px 22px; border-radius: 30px; font-size: 13px; z-index: 999; opacity: 0; transition: all 0.3s ease; pointer-events: none; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div class="shooting-stars"><div class="meteor"></div><div class="meteor"></div><div class="meteor"></div></div>
+    <div class="toast" id="toast">复制成功</div>
+
+    <script>
+        const _0x9e3f = ['🏆 欢迎光临 8点的小店', '了解公告后点击下方商城或联系客服办理', '✅', '所有商品均为 <b>24小时自动发货</b>，交易完成后会自动弹出卡密，也可以在商城上方查询订单。', '📌 <b>安全提示：</b> 购买时请勿设置过于简单的联系方式以防被扫卡。如有商品问题请优先联系客服解决，禁止恶意投诉支付接口。', '* 请勿将本站商品用于违法用途，违者自行承担法律责任。<br>* 如需使用 AlipayHK（香港支付宝）付款请联系本人。', 'Telegram 客服', '@a8oclock', 'https://t.me/a8oclock', 'QQ 客服', '331134915', 'https://8am.007m.top', '点击进入官方商城', 'show', 'QQ号已复制到剪贴板'];
+        
+        (() => {
+            const container = document.createElement('div'); container.className = 'container';
+            const h1 = document.createElement('h1'); h1.innerText = _0x9e3f[0]; container.appendChild(h1);
+            const h2 = document.createElement('h2'); h2.innerText = _0x9e3f[1]; container.appendChild(h2);
+            
+            const box = document.createElement('div'); box.className = 'notice-box';
+            const i1 = document.createElement('div'); i1.className = 'notice-item'; i1.innerHTML = `<span class="icon">${_0x9e3f[2]}</span><span>${_0x9e3f[3]}</span>`; box.appendChild(i1);
+            const w1 = document.createElement('div'); w1.className = 'warning-text'; w1.innerHTML = _0x9e3f[4]; box.appendChild(w1);
+            const w2 = document.createElement('div'); w2.className = 'warning-text'; w2.style.color = '#cbd5e1'; w2.style.fontStyle = 'italic'; w2.style.fontSize = '12px'; w2.innerHTML = _0x9e3f[5]; box.appendChild(w2);
+            container.appendChild(box);
+
+            
+            const dock = document.createElement('div'); dock.className = 'dock-container';
+            
+           
+            const tgCard = document.createElement('div'); tgCard.className = 'dock-card';
+            const tgGlow = document.createElement('div'); tgGlow.className = 'btn-glow'; tgCard.appendChild(tgGlow);
+            tgCard.innerHTML += `<span class="dock-emoji">✈️</span><span class="dock-label">${_0x9e3f[6]}</span><span class="dock-val tg-style">${_0x9e3f[7]}</span>`;
+            dock.appendChild(tgCard);
+            
+           
+            const qqCard = document.createElement('div'); qqCard.className = 'dock-card';
+            const qqGlow = document.createElement('div'); qqGlow.className = 'btn-glow'; qqCard.appendChild(qqGlow);
+            qqCard.innerHTML += `<span class="dock-emoji">🐧</span><span class="dock-label">${_0x9e3f[9]}</span><span class="dock-val qq-style">${_0x9e3f[10]}</span>`;
+            dock.appendChild(qqCard);
+            
+            container.appendChild(dock);
+
+           
+            const wrap = document.createElement('div'); wrap.className = 'btn-wrap';
+            const btn = document.createElement('a'); btn.href = _0x9e3f[11]; btn.className = 'btn-enter'; btn.setAttribute('rel', 'noreferrer');
+            const btnGlow = document.createElement('div'); btnGlow.className = 'btn-glow'; btn.appendChild(btnGlow);
+            const txt = document.createElement('span'); txt.className = 'btn-text'; txt.innerText = _0x9e3f[12];
+            btn.appendChild(txt); wrap.appendChild(btn); container.appendChild(wrap);
+            document.body.appendChild(container);
+
+            
+            const setupFluidEffect = (element, glowObj) => {
+                const handler = (clientX, clientY) => {
+                    const rect = element.getBoundingClientRect();
+                    const x = clientX - rect.left;
+                    const y = clientY - rect.top;
+                    glowObj.style.left = `${x}px`;
+                    glowObj.style.top = `${y}px`;
+                    glowObj.style.opacity = '1';
+                    
+                    const rX = ((y / rect.height) - 0.5) * -16; 
+                    const rY = ((x / rect.width) - 0.5) * 16;
+                    element.style.transform = `rotateX(${rX}deg) rotateY(${rY}deg)`;
+                };
+
+                element.addEventListener('mousemove', (e) => handler(e.clientX, e.clientY));
+                element.addEventListener('touchmove', (e) => {
+                    if(e.touches.length > 0) handler(e.touches[0].clientX, e.touches[0].clientY);
+                }, { passive: true });
+                
+                element.addEventListener('touchstart', (e) => {
+                    if(e.touches.length > 0) handler(e.touches[0].clientX, e.touches[0].clientY);
+                }, { passive: true });
+
+                const reset = () => {
+                    glowObj.style.opacity = '0';
+                    element.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                };
+                element.addEventListener('mouseleave', reset);
+                element.addEventListener('touchend', reset);
+            };
+
+            
+            setupFluidEffect(tgCard, tgCard.querySelector('.btn-glow'));
+            setupFluidEffect(qqCard, qqCard.querySelector('.btn-glow'));
+            setupFluidEffect(btn, btn.querySelector('.btn-glow'));
+
+            
+            tgCard.addEventListener('click', () => { window.open(_0x9e3f[8], '_blank', 'noreferrer noopener'); });
+            qqCard.addEventListener('click', () => {
+                const temp = document.createElement('textarea'); temp.value = _0x9e3f[10];
+                document.body.appendChild(temp); temp.select(); document.execCommand('copy');
+                document.body.removeChild(temp);
+                const toast = document.getElementById('toast'); toast.innerText = _0x9e3f[14];
+                toast.className = `toast ${_0x9e3f[13]}`;
+                setTimeout(() => { toast.className = 'toast'; }, 2000);
+            });
+        })();
+
+        
+        document.oncontextmenu = () => false;
+        document.onkeydown = (e) => {
+            if (e.keyCode === 123 || (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73 || e.keyCode === 83 || e.keyCode === 74))) return false;
+            if (e.metaKey && e.altKey && e.keyCode === 73) return false; 
+        };
+    </script>
+</body>
+</html>
